@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ 星象神諭占卜 ✨</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 純 CSS 星空背景元素 -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
+    <div class="container">
+        <!-- 首頁介紹區塊 -->
+        <div id="intro-screen" class="screen active">
+            <div class="header">
+                <h1>✨ 星象神諭占卜 ✨</h1>
+                <p class="subtitle">傾聽宇宙的低語，揭開你今日的專屬運勢指南</p>
+            </div>
+            
+            <button id="draw-btn" class="glow-on-hover">抽取今日星諭</button>
+        </div>
+
+        <!-- 占卜動畫過渡區塊 -->
+        <div id="loading-screen" class="screen hidden">
+            <div class="crystal-ball">🔮</div>
+            <p>正在解讀群星的軌跡...</p>
+        </div>
+
+        <!-- 結果顯示區塊 -->
+        <div id="result-screen" class="screen hidden">
+            <div class="result-card">
+                <div class="result-header">
+                    <h2 id="result-title">運勢標題</h2>
+                    <p id="result-desc">簡短結果說明</p>
+                </div>
+                
+                <div class="aspects-grid">
+                    <div class="aspect-card">
+                        <div class="aspect-icon">💼</div>
+                        <div class="aspect-title">工作</div>
+                        <div class="aspect-text" id="res-work">工作內容</div>
+                    </div>
+                    <div class="aspect-card">
+                        <div class="aspect-icon">📚</div>
+                        <div class="aspect-title">學業</div>
+                        <div class="aspect-text" id="res-study">學業內容</div>
+                    </div>
+                    <div class="aspect-card">
+                        <div class="aspect-icon">💖</div>
+                        <div class="aspect-title">愛情</div>
+                        <div class="aspect-text" id="res-love">愛情內容</div>
+                    </div>
+                    <div class="aspect-card">
+                        <div class="aspect-icon">💰</div>
+                        <div class="aspect-title">金錢</div>
+                        <div class="aspect-text" id="res-money">金錢內容</div>
+                    </div>
+                </div>
+
+                <div class="conclusion-box">
+                    <div class="quote-icon">❝</div>
+                    <p id="res-conclusion" class="conclusion-text">結語內容</p>
+                </div>
+
+                <button id="reset-btn" class="outline-btn">再占卜一次</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 集中管理資料庫的 JS -->
+    <script src="script.js"></script>
+</body>
+</html>

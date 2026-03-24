@@ -1,0 +1,264 @@
+:root {
+    --bg-dark: #0a0a1a;
+    --primary-color: #a87ffb;
+    --primary-glow: rgba(168, 127, 251, 0.6);
+    --secondary-color: #f9a826;
+    --text-main: #ffffff;
+    --text-muted: #b3b9c5;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
+}
+
+/* 背景星空特效 */
+#stars, #stars2, #stars3 {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background: transparent;
+}
+/* 簡化版的隨機繁星使用 box-shadow 模擬 (這裡僅放一些示例點綴) */
+#stars::after {
+    content: "✦ ✧ ✦ ✧";
+    position: absolute;
+    top: 10%; left: 20%;
+    color: rgba(255,255,255,0.3);
+    word-spacing: 50vw;
+    line-height: 50vh;
+    font-size: 2rem;
+    animation: twinkle 5s infinite rotate;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    position: relative;
+    z-index: 10;
+}
+
+.screen {
+    display: none;
+    text-align: center;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* 標題與介紹 */
+.header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 15px var(--primary-glow);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+/* 按鈕樣式 */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.glow-on-hover {
+    background: linear-gradient(45deg, #a87ffb, #ff71b6, #f9a826, #a87ffb);
+    background-size: 300%;
+    color: #fff;
+    box-shadow: 0 0 20px var(--primary-glow);
+    animation: bg-pan-left 4s infinite linear;
+}
+
+.glow-on-hover:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 30px var(--primary-glow), 0 0 10px #ff71b6;
+}
+
+/* 加載畫面水晶球 */
+.crystal-ball {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: pulseFloat 2s infinite ease-in-out;
+}
+
+/* 結果卡片 (玻璃擬態) */
+.result-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.result-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 20px;
+}
+
+#result-title {
+    font-size: 2.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(249, 168, 38, 0.5);
+}
+
+#result-desc {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+/* 運勢細節網格佈局 */
+.aspects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.aspect-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s;
+}
+
+.aspect-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.aspect-title {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.aspect-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.aspect-icon {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 1.2rem;
+}
+
+/* 結語區塊 */
+.conclusion-box {
+    background: rgba(168, 127, 251, 0.1);
+    border-left: 4px solid var(--primary-color);
+    padding: 15px 20px;
+    border-radius: 0 10px 10px 0;
+    margin-bottom: 30px;
+    position: relative;
+    text-align: left;
+}
+
+.conclusion-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #fff;
+}
+
+.quote-icon {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 3rem;
+    color: rgba(168, 127, 251, 0.2);
+    font-family: serif;
+    line-height: 1;
+}
+
+/* 次要按鈕 */
+.outline-btn {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.outline-btn:hover {
+    background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* 動畫設定 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bg-pan-left {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+@keyframes pulseFloat {
+    0%, 100% { transform: translateY(0) scale(1); text-shadow: 0 0 20px var(--primary-glow); }
+    50% { transform: translateY(-15px) scale(1.1); text-shadow: 0 0 40px #ff71b6; }
+}
+
+/* 響應式：手機版調整 */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .aspects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .result-card {
+        padding: 20px;
+    }
+    
+    #result-title {
+        font-size: 1.8rem;
+    }
+}
