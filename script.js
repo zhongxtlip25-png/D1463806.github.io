@@ -1,163 +1,161 @@
-// ==========================================
-// 占卜資料庫 - 您可以在此處輕鬆修改或新增占卜結果
-// ==========================================
-const fortunesData = [
+// 占卜結果資料（集中整理，方便後續擴充修改）
+const fortuneData = [
     {
-        name: "輝煌之星 ✨ (大吉)",
-        description: "今天的你被宇宙最強的幸運能量包圍，所向無敵！",
-        work: "提出的點子將大受好評，遇到困難也會迎刃而解。",
-        study: "思緒有如泉湧，學習新事物能迅速掌握核心。",
-        love: "魅力無法擋！單身者有浪漫邂逅，有伴侶者感情直線升溫。",
-        money: "意外之財降臨的機率高，之前的投資也將看到豐厚回報。",
-        conclusion: "大膽前進吧，整個宇宙都在背後支持著你！"
+        type: "✨ 大吉 (Great Blessing) ✨",
+        description: {
+            work: "事業運爆棚！今天的提案都會順利通過，主管也會對你刮目相看。",
+            study: "記憶力超群！看過的書都能過目不忘，考試絕對沒問題。",
+            love: "桃花朵朵開！今天有可能會遇到心儀的對象，或是與伴侶感情升溫。",
+            money: "財神爺眷顧！走在路上都有可能撿到錢，投資理財大豐收。"
+        },
+        quote: "幸運女神今天只為你微笑！把握這完美的一天！"
     },
     {
-        name: "順水之舟 ⛵ (中吉)",
-        description: "一切都在平穩中前進，是積累實力的好日子。",
-        work: "按部就班就能有好成績，與同事合作相當愉快。",
-        study: "適合溫故知新，把之前的盲點一次釐清。",
-        love: "平淡中見真情，一個溫暖的問候能讓對方心動。",
-        money: "收支平衡，有機會獲得小額的額外收入或請客。",
-        conclusion: "享受這份平靜與順遂，穩健的步伐走得最遠。"
+        type: "🌟 中吉 (Middle Blessing) 🌟",
+        description: {
+            work: "按部就班，穩紮穩打。雖然沒有驚喜，但進度都在掌控中。",
+            study: "學習遇強則強，找同學一起討論會有意想不到的收穫。",
+            love: "感情平穩發展，適合安排溫馨的小約會，增進彼此了解。",
+            money: "小有偏財運，買張彩券或許有小驚喜，但不宜過度投資。"
+        },
+        quote: "平淡就是福，穩中求勝的一天！"
     },
     {
-        name: "晨曦微光 🌅 (小吉)",
-        description: "好運正在慢慢萌芽，細節中藏著小確幸。",
-        work: "雖然忙碌，但努力都會被上司或客戶看在眼裡。",
-        study: "今天適合將大目標拆解成小任務，逐一擊破。",
-        love: "留意身邊默默關心你的人，或許就是良緣所在。",
-        money: "精打細算能為你省下一筆不小的開銷。",
-        conclusion: "微小的光芒聚集起來，也能照亮整片天空。"
+        type: "🍀 小吉 (Small Blessing) 🍀",
+        description: {
+            work: "稍微遇到點小障礙，但只要耐心溝通就能順利解決。",
+            study: "需要多花點時間複習，不要被周圍的事物分心了。",
+            love: "多一點主動關心對方，對方會強烈感受到你的心意。",
+            money: "理智消費，不要因為一時衝動買了不需要的東西。"
+        },
+        quote: "一步一腳印，微小的幸運也在你身邊！"
     },
     {
-        name: "平靜之湖 💧 (平)",
-        description: "沒有大起大落，是個難得的寧靜之日。",
-        work: "例行公事為主，適合整理桌面與思緒。",
-        study: "專注度普通，不妨換個環境(如咖啡廳)轉換心情。",
-        love: "給彼此一點個人空間，距離反而產生美感。",
-        money: "不宜有太大的金錢變動，守護好錢包即可。",
-        conclusion: "沒有消息就是好消息，享受平凡就是福氣。"
+        type: "😊 吉 (Blessing) 😊",
+        description: {
+            work: "有機會接觸到新任務，是展現自己潛力的好時機。",
+            study: "換個學習環境，比如去無人咖啡廳或圖書館，效率會更高。",
+            love: "單身者有機會透過朋友介紹認識新朋友，不妨去赴約。",
+            money: "正常的收支平衡，可以開始規劃下一次的旅遊基金。"
+        },
+        quote: "保持微笑，好運自然會被你吸引過來！"
     },
     {
-        name: "逆風飛翔 🍃 (末吉)",
-        description: "雖然阻力不小，但這是起飛前的必經過程。",
-        work: "可能會遇到不講理的要求，保持微笑與耐心是解藥。",
-        study: "遇到瓶頸別灰心，去睡個好覺或運動一下再戰。",
-        love: "溝通容易產生誤會，多點包容，少點猜忌。",
-        money: "避免衝動購物，購買前請默念三次『我真的需要嗎？』。",
-        conclusion: "逆風能讓你飛得更高，轉念一想全是風景。"
+        type: "💪 末吉 (Ending Blessing) 💪",
+        description: {
+            work: "事情積壓較多，建議列出優先順序，一件一件慢慢完成。",
+            study: "遇到不懂的問題不要硬撐，請教老師或同學會豁然開朗。",
+            love: "容易因為小事發生口角，各退一步海闊天空。",
+            money: "不要輕易借錢給別人，以免引發不必要的財務糾紛。"
+        },
+        quote: "黑暗過後就是黎明，再堅持一下！"
     },
     {
-        name: "暗礁潛伏 🌑 (凶)",
-        description: "周遭充滿未知的變數，今日以防守為重。",
-        work: "仔細檢查送出的信件與文件，小心低級錯誤發生。",
-        study: "進度不如預期，別給自己太大壓力，盡力就好。",
-        love: "情緒起伏較大，別把工作上的氣出在重要的人身上。",
-        money: "有破財風險，出門在外請留意隨身貴重物品。",
-        conclusion: "烏雲總會散去，今天只要平安度過就是勝利！"
+        type: "🌧️ 凶 (Curse) 🌧️",
+        description: {
+            work: "容易犯粗心的錯誤，送出重要文件前務必再三檢查。",
+            study: "注意力難以集中，建議多做幾次深呼吸放鬆一下。",
+            love: "對方可能會有讓你猜不透的行為，不要過度解讀，直接溝通最好。",
+            money: "有漏財危機，出門在外請看管好自己的錢包與貴重物品。"
+        },
+        quote: "低谷是為了下一次的跳躍做準備，別灰心！"
     },
     {
-        name: "破釜沉舟 🌋 (大凶但有轉機)",
-        description: "看似跌落谷底，實則是絕地大反攻的契機！",
-        work: "累積的問題可能會爆發，勇敢面對並一次解決它。",
-        study: "與其死記硬背，不如徹底打掉重練，重新理解基礎。",
-        love: "如果有心結，今天是攤開來說清楚的最好時機。",
-        money: "荷包大失血，就當作是花錢消災，擋煞買平安吧。",
-        conclusion: "最低谷的時候，無論往哪個方向走，都是向上！"
+        type: "🛌 大凶 (Great Curse) 🛌",
+        description: {
+            work: "諸事不順，建議今天保持低調，少說話多做事為妙。",
+            study: "可能會遇到怎麼解都解不開的難題，先放著明天再說吧。",
+            love: "感情受到嚴峻考驗，需要更多的包容和理解度過難關。",
+            money: "破財消災，投資切忌盲目跟風，保守為上。"
+        },
+        quote: "物極必反，否極泰來！今天早點洗洗睡吧！"
     },
     {
-        name: "愛神之箭 💘 (特殊：桃花運高漲)",
-        description: "今日的你自帶粉紅濾鏡，人氣大爆發。",
-        work: "靠著極佳的人緣，跨部門協調猶如喝水般簡單。",
-        study: "可以向心儀的同學請教問題，一舉兩得！",
-        love: "今日的愛情主角就是你！勇敢主動出擊，成功率高達 200%。",
-        money: "可能會在治裝或約會上花費較多，但這筆錢花得很值得。",
-        conclusion: "愛是宇宙裡最迷人的魔法，準備好迎接幸福吧。"
+        type: "🔮 神秘運作 (Mystic Mystery) 🔮",
+        description: {
+            work: "靈感湧現！你可能會想出一個震驚全場的絕佳好點子。",
+            study: "直覺非常準確，選擇題遇到不會的就相信你的第一直覺！",
+            love: "一個意料之外的訊息會打亂你的心跳節奏。",
+            money: "發掘了新的省錢小妙招，積少成多也是一筆財富。"
+        },
+        quote: "宇宙正在為你編織一個奇妙的驚喜！"
     },
     {
-        name: "財源滾滾 🤑 (特殊：金錢運大爆發)",
-        description: "財神爺今天坐在你家客廳不走了！",
-        work: "有機會談成大案子，或是獲得實質上的業績獎勵。",
-        study: "投資自己的腦袋是最賺錢的生意，今天適合報名進修。",
-        love: "用一頓豐盛的晚餐犒賞自己和愛人吧，別省這點錢。",
-        money: "偏財運極強，發票中獎、彩券幸運兒可能就是你。",
-        conclusion: "抓住這波強大的財富能量，讓錢錢變成喜歡的形狀！"
+        type: "🐾 貓奴吉 (Cat's Blessing) 🐾",
+        description: {
+            work: "跟同事的關係就像貓咪一樣，保持點距離反而更舒適。",
+            study: "今天適合伸個懶腰，吃點零食再繼續努力，效率加倍！",
+            love: "傲嬌一點也沒關係，懂你的人會覺得你很可愛。",
+            money: "可能會忍不住花錢買寵物用品或可愛的小東西。"
+        },
+        quote: "喵～今天也是慵懶且充滿魅力的一天！"
     },
     {
-        name: "靈光乍現 💡 (特殊：靈感大爆發)",
-        description: "你的大腦連結了宇宙伺服器，創意源源不絕。",
-        work: "長期卡關的企劃今天突然有了突破性的瘋狂好點子。",
-        study: "解開複雜的難題，就像頓悟一般通體舒暢。",
-        love: "想點浪漫又具創意的小驚喜，對方會感動到不行。",
-        money: "你的點子很值錢，趕快把它們記錄下來變成未來的資產。",
-        conclusion: "別忽視腦海中那些一閃而過的念頭，它們都是寶藏。"
+        type: "🌌 宇宙大爆發 (Cosmic Big Bang) 🌌",
+        description: {
+            work: "表現亮眼，堪稱全場 MVP，所有人的目光都在你身上。",
+            study: "有如神助，不只學得快，還能舉一反三，融會貫通。",
+            love: "魅力無法擋，走到哪裡都有回頭率，自信地展現自己吧！",
+            money: "財運大爆發，今天無論做什麼都有如神助般順利！"
+        },
+        quote: "你就是今天的宇宙中心，盡情發光發熱吧！"
     }
 ];
 
-// ==========================================
-// 頁面與互動邏輯
-// ==========================================
+// DOM 元素選取
 document.addEventListener('DOMContentLoaded', () => {
-    // 取得 DOM 元素
-    const introScreen = document.getElementById('intro-screen');
+    const welcomeScreen = document.getElementById('welcome-screen');
     const loadingScreen = document.getElementById('loading-screen');
     const resultScreen = document.getElementById('result-screen');
-    
+
     const drawBtn = document.getElementById('draw-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    
-    const resTitle = document.getElementById('result-title');
-    const resDesc = document.getElementById('result-desc');
-    const resWork = document.getElementById('res-work');
-    const resStudy = document.getElementById('res-study');
-    const resLove = document.getElementById('res-love');
-    const resMoney = document.getElementById('res-money');
-    const resConclusion = document.getElementById('res-conclusion');
+    const retryBtn = document.getElementById('retry-btn');
 
-    // 抽籤按鈕點擊事件
+    const resultTitle = document.getElementById('result-title');
+    const descWork = document.getElementById('desc-work');
+    const descStudy = document.getElementById('desc-study');
+    const descLove = document.getElementById('desc-love');
+    const descMoney = document.getElementById('desc-money');
+    const resultQuote = document.getElementById('result-quote');
+
+    // 點擊開始占卜
     drawBtn.addEventListener('click', () => {
-        // 切換到載入畫面
-        switchScreen(introScreen, loadingScreen);
+        // 隱藏首頁，顯示載入動畫
+        welcomeScreen.classList.add('hidden');
+        loadingScreen.classList.remove('hidden');
+
+        // 模擬連結宇宙能量的時間 (2.5秒)
+        setTimeout(() => {
+            showResult();
+        }, 2500);
+    });
+
+    // 點擊再占卜一次
+    retryBtn.addEventListener('click', () => {
+        // 重置畫面狀態
+        resultScreen.classList.add('hidden');
+        welcomeScreen.classList.remove('hidden');
         
-        // 模擬星象解讀的延遲時間 (1.5秒)
-        setTimeout(() => {
-            generateFortune();
-            switchScreen(loadingScreen, resultScreen);
-        }, 1500);
+        // 將結果區塊回到頂部
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 重新占卜按鈕點擊事件
-    resetBtn.addEventListener('click', () => {
-        switchScreen(resultScreen, introScreen);
-    });
+    // 顯示占卜結果的邏輯
+    function showResult() {
+        // 隨機抽取一個結果
+        const randomIndex = Math.floor(Math.random() * fortuneData.length);
+        const fortune = fortuneData[randomIndex];
 
-    // 畫面切換輔助函數
-    function switchScreen(hideElement, showElement) {
-        hideElement.classList.remove('active');
-        // 等待淡出動畫(若有)或直接加上 hidden
-        setTimeout(() => {
-            hideElement.classList.add('hidden');
-            showElement.classList.remove('hidden');
-            // 延遲一點點加上 active 觸發 CSS 動畫
-            setTimeout(() => {
-                showElement.classList.add('active');
-            }, 50);
-        }, 200);
-    }
+        // 將結果填充到 DOM 元素中
+        resultTitle.textContent = fortune.type;
+        descWork.textContent = fortune.description.work;
+        descStudy.textContent = fortune.description.study;
+        descLove.textContent = fortune.description.love;
+        descMoney.textContent = fortune.description.money;
+        resultQuote.textContent = fortune.quote;
 
-    // 隨機抽取運勢並寫入畫面
-    function generateFortune() {
-        // 隨機選取一筆資料
-        const randomIndex = Math.floor(Math.random() * fortunesData.length);
-        const fortune = fortunesData[randomIndex];
-
-        // 將資料寫入 DOM
-        resTitle.textContent = fortune.name;
-        resDesc.textContent = fortune.description;
-        resWork.textContent = fortune.work;
-        resStudy.textContent = fortune.study;
-        resLove.textContent = fortune.love;
-        resMoney.textContent = fortune.money;
-        resConclusion.textContent = fortune.conclusion;
+        // 隱藏載入畫面，顯示結果畫面
+        loadingScreen.classList.add('hidden');
+        resultScreen.classList.remove('hidden');
     }
 });

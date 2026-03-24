@@ -1,264 +1,242 @@
 :root {
-    --bg-dark: #0a0a1a;
-    --primary-color: #a87ffb;
-    --primary-glow: rgba(168, 127, 251, 0.6);
-    --secondary-color: #f9a826;
-    --text-main: #ffffff;
-    --text-muted: #b3b9c5;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --card-border: rgba(255, 255, 255, 0.1);
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    --bg-color: #1a0b2e;
+    --text-color: #f0e6ff;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --primary-color: #b366ff;
+    --primary-hover: #9933ff;
+    --accent-color: #00e6e6;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
+    background: radial-gradient(circle at center, #2c1654 0%, var(--bg-color) 100%);
+    color: var(--text-color);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     overflow-x: hidden;
-    position: relative;
-    line-height: 1.6;
-}
-
-/* 背景星空特效 */
-#stars, #stars2, #stars3 {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: -1;
-    background: transparent;
-}
-/* 簡化版的隨機繁星使用 box-shadow 模擬 (這裡僅放一些示例點綴) */
-#stars::after {
-    content: "✦ ✧ ✦ ✧";
-    position: absolute;
-    top: 10%; left: 20%;
-    color: rgba(255,255,255,0.3);
-    word-spacing: 50vw;
-    line-height: 50vh;
-    font-size: 2rem;
-    animation: twinkle 5s infinite rotate;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.2; transform: scale(0.8); }
-    50% { opacity: 0.8; transform: scale(1.1); }
 }
 
 .container {
     width: 90%;
     max-width: 600px;
-    margin: 20px auto;
-    position: relative;
-    z-index: 10;
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .screen {
-    display: none;
-    text-align: center;
-    animation: fadeIn 0.6s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.6s ease-in-out;
 }
 
-.screen.active {
-    display: block;
+.hidden {
+    display: none !important;
 }
 
-/* 標題與介紹 */
-.header h1 {
-    font-size: 2.5rem;
+.title {
+    font-size: 2.2rem;
     color: var(--primary-color);
-    text-shadow: 0 0 15px var(--primary-glow);
-    margin-bottom: 10px;
-    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(179, 102, 255, 0.6);
+    margin-bottom: 1rem;
+    line-height: 1.3;
 }
 
 .subtitle {
-    color: var(--text-muted);
     font-size: 1.1rem;
-    margin-bottom: 40px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    opacity: 0.85;
 }
 
 /* 按鈕樣式 */
-button {
-    font-family: inherit;
-    cursor: pointer;
-    outline: none;
+.btn {
+    background-color: var(--primary-color);
+    color: white;
     border: none;
-    border-radius: 50px;
-    padding: 15px 40px;
+    padding: 1rem 2.5rem;
     font-size: 1.2rem;
-    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(179, 102, 255, 0.4);
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-.glow-on-hover {
-    background: linear-gradient(45deg, #a87ffb, #ff71b6, #f9a826, #a87ffb);
-    background-size: 300%;
-    color: #fff;
-    box-shadow: 0 0 20px var(--primary-glow);
-    animation: bg-pan-left 4s infinite linear;
+.btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(179, 102, 255, 0.6);
 }
 
-.glow-on-hover:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 0 30px var(--primary-glow), 0 0 10px #ff71b6;
+.btn:active {
+    transform: translateY(1px);
 }
 
-/* 加載畫面水晶球 */
+.secondary-btn {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    margin-top: 2rem;
+    color: var(--text-color);
+    box-shadow: none;
+}
+
+.secondary-btn:hover {
+    background-color: rgba(179, 102, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(179, 102, 255, 0.2);
+}
+
+/* 占卜載入動畫 */
+.crystal-ball-container {
+    padding: 20px;
+    margin-bottom: 1.5rem;
+}
+
 .crystal-ball {
-    font-size: 5rem;
-    margin-bottom: 20px;
-    animation: pulseFloat 2s infinite ease-in-out;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.8) 0%, rgba(179, 102, 255, 0.6) 30%, rgba(10, 5, 20, 0.9) 100%);
+    box-shadow: 0 0 40px rgba(179, 102, 255, 0.7), inset 0 0 20px rgba(255,255,255,0.4);
+    position: relative;
+    animation: float 3s ease-in-out infinite;
 }
 
-/* 結果卡片 (玻璃擬態) */
+.glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    filter: blur(25px);
+    animation: pulse 2s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+.loading-text {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    animation: breathe 2s ease-in-out infinite;
+    color: var(--primary-color);
+}
+
+/* 結果卡片 */
+.result-title {
+    font-size: 2.2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 230, 230, 0.5);
+    animation: dropIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+@media (min-width: 500px) {
+    .card-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 .result-card {
     background: var(--card-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-}
-
-.result-header {
-    margin-bottom: 25px;
-    border-bottom: 1px solid var(--card-border);
-    padding-bottom: 20px;
-}
-
-#result-title {
-    font-size: 2.2rem;
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-    text-shadow: 0 0 10px rgba(249, 168, 38, 0.5);
-}
-
-#result-desc {
-    font-size: 1.1rem;
-    color: var(--text-main);
-}
-
-/* 運勢細節網格佈局 */
-.aspects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.aspect-card {
-    background: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
-    padding: 15px;
+    padding: 1.2rem;
     text-align: left;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.2s;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, background 0.3s ease;
+    animation: slideUp 0.6s ease-out backwards;
 }
 
-.aspect-card:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.05);
+/* 為每張卡片設定不同的延遲時間，實現交錯載入效果 */
+.result-card:nth-child(1) { animation-delay: 0.1s; }
+.result-card:nth-child(2) { animation-delay: 0.2s; }
+.result-card:nth-child(3) { animation-delay: 0.3s; }
+.result-card:nth-child(4) { animation-delay: 0.4s; }
+
+.result-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
 }
 
-.aspect-title {
-    font-size: 0.9rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: inline-block;
+.result-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    color: #ffd166;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.aspect-text {
+.result-card p {
+    margin: 0;
     font-size: 0.95rem;
-    color: var(--text-muted);
+    line-height: 1.6;
+    opacity: 0.9;
 }
 
-.aspect-icon {
-    display: inline-block;
-    margin-right: 5px;
-    font-size: 1.2rem;
-}
-
-/* 結語區塊 */
-.conclusion-box {
-    background: rgba(168, 127, 251, 0.1);
-    border-left: 4px solid var(--primary-color);
-    padding: 15px 20px;
-    border-radius: 0 10px 10px 0;
-    margin-bottom: 30px;
-    position: relative;
-    text-align: left;
-}
-
-.conclusion-text {
-    font-size: 1.1rem;
+.quote {
+    font-size: 1.25rem;
+    margin: 2rem 0 0 0;
+    font-weight: bold;
+    color: #fff;
     font-style: italic;
-    color: #fff;
+    background: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary-color);
+    animation: fadeIn 1s ease-in-out 0.8s backwards;
 }
 
-.quote-icon {
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    font-size: 3rem;
-    color: rgba(168, 127, 251, 0.2);
-    font-family: serif;
-    line-height: 1;
-}
-
-/* 次要按鈕 */
-.outline-btn {
-    background: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-.outline-btn:hover {
-    background: var(--primary-color);
-    color: #fff;
-    box-shadow: 0 0 15px var(--primary-glow);
-}
-
-/* 動畫設定 */
+/* 動畫定義 */
 @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes bg-pan-left {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+@keyframes dropIn {
+    from { opacity: 0; transform: scale(0.8) translateY(-30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-@keyframes pulseFloat {
-    0%, 100% { transform: translateY(0) scale(1); text-shadow: 0 0 20px var(--primary-glow); }
-    50% { transform: translateY(-15px) scale(1.1); text-shadow: 0 0 40px #ff71b6; }
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* 響應式：手機版調整 */
-@media (max-width: 600px) {
-    .header h1 {
-        font-size: 2rem;
-    }
-    
-    .aspects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .result-card {
-        padding: 20px;
-    }
-    
-    #result-title {
-        font-size: 1.8rem;
-    }
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.4; filter: blur(25px) hue-rotate(0deg); }
+    50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.9; filter: blur(35px) hue-rotate(45deg); }
+    100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.4; filter: blur(25px) hue-rotate(0deg); }
+}
+
+@keyframes breathe {
+    0%, 100% { opacity: 0.6; text-shadow: 0 0 5px rgba(179, 102, 255, 0.3); }
+    50% { opacity: 1; text-shadow: 0 0 15px rgba(179, 102, 255, 0.8); }
 }
